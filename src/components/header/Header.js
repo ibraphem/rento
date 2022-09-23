@@ -9,14 +9,14 @@ import {
   FaHome,
 } from "react-icons/fa";
 import MobileMenu from "../../components/MobileMenu";
-import Logo from "../../img/logo.png";
+// import Logo from "../../img/logo.png";
 import "../header/Header.css"
 import { useSelector } from 'react-redux';
 
 const Header = () => {
   const favRent = useSelector((state) => state?.favoriteRent?.rent);
 
-  console.log(favRent);
+  // console.log(favRent);
     return (
         <Fragment>
       {/* <section className="gauto-header-top-area">

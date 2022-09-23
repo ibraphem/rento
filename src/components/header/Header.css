@@ -183,14 +183,14 @@
   .header-action-left a::before {
     left: -25px;
     top: 0;
-    background: #ec3323 none repeat scroll 0 0;
+    background: #003e80 none repeat scroll 0 0;
     -webkit-transform: skewX(45deg);
     transform: skewX(45deg);
 
   }
 
   .header-action-left a {
-    background: #ec3323 none repeat scroll 0 0;
+    background: #003e80 none repeat scroll 0 0;
   }
 
   /* .header-action-right a::after {
@@ -218,13 +218,13 @@
   .header-action-bottom a::before {
     right: -25px;
     bottom: 0px;
-    background: #ec3323 none repeat scroll 0 0;
+    background: #003e80 none repeat scroll 0 0;
     -webkit-transform: skewX(45deg);
     transform: skewX(-45deg);
   }
 
   .header-action-bottom a{
-    background: #ec3323 none repeat scroll 0 0;
+    background: #003e80 none repeat scroll 0 0;
   }
   
   .header-action a i {
@@ -232,7 +232,7 @@
   }
   
   .gauto-mainmenu-area {
-    background: #020202 none repeat scroll 0 0;
+    background: #fff none repeat scroll 0 0;
     border-bottom: 3px solid #363636;
   }
   
@@ -246,7 +246,7 @@
   }
   
   .mainmenu ul li a {
-    color: #eee;
+    color: #000;
     display: block;
     padding: 20px 12px;
     text-transform: uppercase;
@@ -318,7 +318,7 @@
   
   .header-cart-box #dropdownMenu1 {
     border: medium none;
-    background: url(/src/img/icon-heart.png) no-repeat scroll 0 0;
+    background: url(/src/assets/img/icon-heart.png) no-repeat scroll 0 0;
     cursor: pointer;
     width: 30px;
     height: 30px;

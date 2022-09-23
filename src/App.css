@@ -152,7 +152,7 @@ button.gauto-theme-btn {
   background: transparent;
   border-width: 2px;
   border-style: solid;
-  border-color: #ec3323;
+  border-color: #003e80;
   position: relative;
   margin: 1em;
   display: inline-block;
@@ -172,7 +172,7 @@ button.gauto-theme-btn:after {
   content: "";
   display: block;
   position: absolute;
-  border-color: #ec3323;
+  border-color: #003e80;
   box-sizing: border-box;
   border-style: solid;
   width: 1em;
@@ -202,14 +202,14 @@ button.gauto-theme-btn:hover:before,
 button.gauto-theme-btn:hover:after {
   width: calc(100% + 12px);
   height: calc(100% + 12px);
-  border-color: #ec3323;
+  border-color: #003e80;
 }
 
 .gauto-btn:hover,
 button.gauto-theme-btn:hover {
   color: #fff;
-  background-color: #ec3323;
-  border-color: #ec3323;
+  background-color: #003e80;
+  border-color: #003e80;
 }
 
 button.gauto-theme-btn {
@@ -265,14 +265,14 @@ button.gauto-theme-btn:hover:before,
 button.gauto-theme-btn:hover:after {
   width: calc(100% + 12px);
   height: calc(100% + 12px);
-  border-color: #ec3323;
+  border-color: #003e80;
 }
 
 .gauto-btn:hover,
 button.gauto-theme-btn:hover {
   color: #fff;
-  background-color: #ec3323;
-  border-color: #ec3323;
+  background-color: #003e80;
+  border-color: #003e80;
 }
 
 .site-heading {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
-import hero1 from "../../img/hero1.jpg"
+// import hero1 from "../../img/hero1.jpg"
 import "../hero/Hero.css"
 import { FaCheck, FaTimes } from "react-icons/fa";
 import mockImg from "../../assets/img/rentoHero.png"
