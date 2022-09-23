@@ -48,7 +48,7 @@ const RentDetails = () => {
     if(step === 2 && initialPayment >= rentDataDetail?.amount) {
       setStep(1)
     }
-  }, [step, initialPayment, rentDataDetail])
+  }, [step, initialPayment])
   
 
   const applyForRent = (e) => {
