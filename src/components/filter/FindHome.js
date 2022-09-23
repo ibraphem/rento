@@ -17,6 +17,7 @@ const FindHome = () => {
       setAllLGAs(lga)
     }
   }, [selectedState])
+  console.log(selectedLGAs);
   
     return (
         <section className="gauto-find-area">

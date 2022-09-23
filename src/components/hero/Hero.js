@@ -1,13 +1,9 @@
-import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
-// import hero1 from "../../img/hero1.jpg"
 import "../hero/Hero.css"
 import { FaCheck, FaTimes } from "react-icons/fa";
 import mockImg from "../../assets/img/rentoHero.png"
 const Hero = () => {
-    const onClick = (e) => {
-        e.preventDefault();
-      };
+    
     
     return (
         <section className="gauto-slider-area fix">
@@ -32,7 +28,7 @@ const Hero = () => {
                         </div>
                       </Col>
                       <Col md={6}>
-                        <img className="heroImg" src={mockImg}/>
+                        <img className="heroImg" src={mockImg} alt="Hero Img"/>
                       </Col>
                     </Row>
                   </Container>

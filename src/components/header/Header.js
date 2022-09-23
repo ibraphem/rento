@@ -1,15 +1,7 @@
 import {Fragment} from 'react';
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
-import {
-  FaPhoneAlt,
-  FaSignInAlt,
-  FaUserAlt,
-  FaSearch,
-  FaHome,
-} from "react-icons/fa";
 import MobileMenu from "../../components/MobileMenu";
-// import Logo from "../../img/logo.png";
 import "../header/Header.css"
 import { useSelector } from 'react-redux';
 

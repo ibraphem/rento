@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import {
   FaToilet,
   FaHome,
@@ -7,7 +7,6 @@ import {
   FaChair,
   FaUtensilSpoon,
   FaBars,
-  FaArrowAltCircleRight,
 } from "react-icons/fa";
 import Slider from "react-slick";
 import { rentDataDetail } from "../../mock/rentData";
@@ -16,7 +15,6 @@ import "../rentDetails/Rentdetails.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CustomToolTip from "../CustomToolTip";
-import { Link } from "react-router-dom";
 import Alerts from "../Alerts";
 import { validatePhoneNumber } from "../../utils/validate";
 import FullPageLoader from "../loaders/fullPageLoader/FullPageLoader";
@@ -72,10 +70,12 @@ const RentDetails = () => {
     }
 
     if(initialPayment === rentDataDetail?.amount ) {
+      setShowFullPageLoading(true)
       // Call the onboarding endpoint
     }
     if(initialPayment >= rentDataDetail?.amount / 2 && initialPayment < rentDataDetail?.amount){
       setStep(2)
+      setShowFullPageLoading(true)
       //Call Endpoint
 
     }
@@ -225,10 +225,12 @@ const RentDetails = () => {
                       <Col lg={5} md={12} className="mb-2">
                         <p>
                           <label>
-                           Enter Your BVN
+                           Partner Company
                           </label>
                           <input
-                            type="email"
+                            type="text"
+                            onChange={(e) => setPartnerCompany(e.target.value)}
+                            value={partnerCompany}
                             placeholder="somebody@example.com"
                             required
                           />
