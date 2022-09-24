@@ -157,6 +157,8 @@
     opacity: 0.25; 
     cursor: not-allowed;
   }
+
+
   
   .offer-action:after {
     position: absolute;
@@ -170,6 +172,14 @@
     transform: skewX(40deg);
     -webkit-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
+  }
+
+  .offer-action2::after {
+    background: #ec3323 none repeat scroll 0 0 !important; 
+  }
+
+  .offer-action2:hover {
+    background: #003e80 none repeat scroll 0 0 !important; 
   }
   
   .offer-action:hover {

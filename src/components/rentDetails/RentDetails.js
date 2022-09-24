@@ -75,7 +75,7 @@ const RentDetails = () => {
     }
     if(initialPayment >= rentDataDetail?.amount / 2 && initialPayment < rentDataDetail?.amount){
       setStep(2)
-      setShowFullPageLoading(true)
+      // setShowFullPageLoading(true)
       //Call Endpoint
 
     }

@@ -643,7 +643,7 @@
 }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   .headerContainer {
-    padding-top: 15px !important;
+    padding-top: 35px !important;
   }
   .header-top-left:before {
     display: none;

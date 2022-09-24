@@ -1,6 +1,5 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import "../apartments/PropertyCard.css"
 import PropertyCard from './PropertyCard';
 
 const Properties = ({rentData, title, isfavScreen}) => {

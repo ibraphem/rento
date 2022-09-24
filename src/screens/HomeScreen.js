@@ -5,11 +5,11 @@ import { rentData } from '../mock/rentData';
 
 const HomeScreen = () => {
     return (
-        <div style={{position: "relative", paddingTop: "180px"}}>
+        <>
            <Header/> 
            <Hero/>
            <Properties rentData={rentData} title="Apartment"/>
-        </div>
+        </>
     );
 };
 

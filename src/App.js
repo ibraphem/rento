@@ -4,9 +4,9 @@ import AllRoutes from './components/router/AllRoutes';
 
 const App = () => {
   return (
-    <>
+    <div className='wrapper'>
       <AllRoutes/>
-    </>
+    </div>
   );
 };
 

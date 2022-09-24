@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToFavoriteRent, removeFromFavoriteRent } from "../../redux/slices/favouriteRentSlice";
 import { amountFormat } from "../../utils/format";
+import "../apartments/PropertyCard.css"
 
 const PropertyCard = ({data, isfavScreen = false}) => {
   const dispatch = useDispatch()
@@ -16,15 +17,18 @@ const PropertyCard = ({data, isfavScreen = false}) => {
   
     return (
         <div className="single-offers">
+        <Link to={`/details/${data?.id}`}>
         <div className="offer-image">
-          <Link to="/car-booking">
+          <Link to={`/details/${data?.id}`}>
             <img src={data?.coverImage} alt={data?.apartmentType} />
           </Link>
         </div>
+        </Link>
         <div className="offer-text">
-          <Link to="/car-booking">
+          <Link to={`/details/${data?.id}`}>
             <h3>{data?.apartmentType} at {data?.lga} {data?.state}</h3>
           </Link>
+          <Link to={`/details/${data?.id}`}>
           <h4>
           &#8358;{amountFormat(data?.amount)}<span>/ {data?.paymentMode}</span>
           </h4>
@@ -42,7 +46,8 @@ const PropertyCard = ({data, isfavScreen = false}) => {
               {data?.furnished}
             </li>
           </ul>
-          <div className="offer-action">
+          </Link>
+          <div className={isfavScreen ? "offer-action2 offer-action" : "offer-action"}>
             <Link
               to={`/details/${data?.id}`}
               className="offer-btn-1"
@@ -58,7 +63,7 @@ const PropertyCard = ({data, isfavScreen = false}) => {
             </Link>
           ): (
             <Link
-            className={checkIsFavRent(data?.id) ? "offer-btn-2 disabled-link" : "offer-btn-2 "}
+            className={checkIsFavRent(data?.id) ? "offer-btn-2 disabled-link" : "offer-btn-2"}
             onClick={() => dispatch(addToFavoriteRent(data))} 
           >
              Add to Favorite
