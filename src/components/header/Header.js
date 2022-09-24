@@ -1,23 +1,26 @@
-import {Fragment} from 'react';
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
-import MobileMenu from "../../components/MobileMenu";
+import {
+  FaPhoneAlt,
+  FaSignInAlt,
+  FaUserAlt,
+} from "react-icons/fa";
+import MobileMenu from "../MobileMenu/index"
 import "../header/Header.css"
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const favRent = useSelector((state) => state?.favoriteRent?.rent);
 
-  // console.log(favRent);
     return (
-        <Fragment>
-      {/* <section className="gauto-header-top-area">
+      <div className="headerContainer" style={{position: "fixed", top: 0, width:"100vw", zIndex: 50000, backgroundColor:"#fff"}}>
+      <section className="gauto-header-top-area" style={{position: "relative"}}>
         <Container>
           <Row>
             <Col md={6}>
               <div className="header-top-left">
                 <p>
-                  Need Help? <FaPhoneAlt /> Call: +234 703 125 9185
+                  Need help? <FaPhoneAlt /> call: +234 703 1259 185
                 </p>
               </div>
             </Col>
@@ -25,35 +28,40 @@ const Header = () => {
               <div className="header-top-right">
                 <Link to="/login">
                   <FaSignInAlt />
-                 Login
+                  Login
                 </Link>
                 <Link to="/register">
                   <FaUserAlt />
                   Register
                 </Link>
+        
               </div>
             </Col>
           </Row>
         </Container>
-      </section> */}
-      {/* <header className="gauto-main-header-area">
-      
+      </section>
+      <header className="gauto-main-header-area bg-white">
+        <Container>
+          <Row>
+            <Col md={3}>
+              <div className="site-logo">
+                <a href="/">
+                  {/* <img src={Logo} alt="gauto" /> */}
+                  RENTO LOGO
+                </a>
+              </div>
+            </Col>
+           <Col lg={6} sm={9}></Col>
             <div className="col-lg-3">
-              
-            </div>
-            <div className="col-lg-3 header-action-right">
-              
-            </div>
-            <div className="col-lg-3">
-              <div className="header-action header-action-left">
-              <Link to="/contact">
-                  <FaHome /> Enlist Your Property
+              <div className="header-action">
+                <Link to="/contact">
+                  <FaPhoneAlt /> Request Call
                 </Link>
               </div>
             </div>
           </Row>
         </Container>
-      </header> */}
+      </header>
       <section className="gauto-mainmenu-area" >
         <Container>
           <Row>
@@ -65,17 +73,7 @@ const Header = () => {
                       <Link to="/">Home</Link>
                     </li>
                     <li>
-                      <Link to="/about">Who We Are</Link>
-                    </li>
-                  
-                    <li>
-                      <Link to="/about">What We DO</Link>
-                    </li>
-                  
-                    <li>
-                      <Link to="/contact">
-                        Contact Us
-                      </Link>
+                      <Link to="/about">About</Link>
                     </li>
                   </ul>
                 </nav>
@@ -86,25 +84,21 @@ const Header = () => {
                 <MobileMenu />
                 <div className="header-cart-box">
                   <div className="login dropdown">
-                    <Link to="/favorites" className="cart-icon" id="dropdownMenu1">
+                    {favRent?.length > 0 && (
+                      <Link to="/favorites" className="cart-icon" id="dropdownMenu1">
                       <span>{favRent?.length}</span>
                     </Link>
+                    )}
+                    
                   </div>
                 </div>
-                {/* <div className="search-box">
-                  <form>
-                    <input type="search" placeholder="Search" />
-                    <button type="submit">
-                      <FaSearch />
-                    </button>
-                  </form>
-                </div> */}
+               
               </div>
             </Col>
           </Row>
         </Container>
       </section>
-    </Fragment>
+    </div>
     );
 };
 

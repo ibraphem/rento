@@ -1,53 +1,41 @@
 import { Col, Container, Row } from "react-bootstrap";
-import "../hero/Hero.css";
-import { FaCheck, FaTimes } from "react-icons/fa";
-import mockImg from "../../assets/img/rentoHero.png";
+import hero1 from "../../assets/img/hero1.jpg"
+import "../hero/Hero.css"
+import FindHome from "../filter/FindHome";
+import { FaCheckCircle, FaRegTimesCircle } from "react-icons/fa";
 
 const Hero = () => {
-  return (
-    <section className="gauto-slider-area">
-    <div className="gauto-main-slide" >
-          <div className="gauto-main-caption">
-          <div className="gauto-caption-cell">
-            <Container>
-              <Row>
-                <Col md={6}>
-                  <div className="left">
-                    <h1>Agency Fee <FaTimes color="#ec3323"/></h1>
-                    <h1>Agreement Fee <FaTimes color="#ec3323"/></h1>
-                    <h1>Flexible Payment <FaCheck color="#408000"/></h1>
-                    <p>
-                      We offer prospective clients the opportunity to partner
-                      with us in our various products and earn juicy high return
-                      on their investments.
-                    </p>
-                    <button>Create Free Account</button>
-                  </div>
-                </Col>
-                <Col md={6} className="rightCol" >
-                  <div className="right">
-                    <div className="image-frame">
-                      <img
-                        src={mockImg}
-                        alt="rent"
-                      />
-                      <div className="box-1">
-                        <div className="circle" />
-                        <h3>+12.4%</h3>
-                        <p>Revenue earned</p>
-                      </div>
-                   
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+    
+    return (
+        <section className="gauto-slider-area fix">
+       
+          <div className="slide">
+            <div
+              className=" gauto-main-slide"
+              style={{ backgroundImage: `url(${hero1})` }}
+            >
+              <div className="gauto-main-caption">
+                <div className="gauto-caption-cell">
+                  <Container>
+                    <Row>
+                      <Col md={12}>
+                          <div className="heroCaption">
+                            <h2>Agency Fee <FaRegTimesCircle color="#ec3323"/></h2>
+                            <h2>Agreement Fee <FaRegTimesCircle color="#ec3323"/></h2>
+                            <h2>Flexible Payment <FaCheckCircle color="#00ff00"/></h2>
+
+                          </div>
+                          <FindHome/>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+              </div>
+            </div>
           </div>
-          </div>
-          </div>
-          </section>
-     
-  );
+    
+      </section>
+    );
 };
 
 export default Hero;

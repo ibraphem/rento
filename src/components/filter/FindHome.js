@@ -20,7 +20,7 @@ const FindHome = () => {
   console.log(selectedLGAs);
   
     return (
-        <section className="gauto-find-area">
+        <section className="gauto-find-area" style={{marginBottom: "20px", marginTop:"20px"}}>
         <Container>
           <Row>
             <Col md={12}>
