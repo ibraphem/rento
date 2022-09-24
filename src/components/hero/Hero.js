@@ -29,7 +29,7 @@ const Hero = () => {
                     <div className="image-frame">
                       <img
                         src={mockImg}
-                        alt
+                        alt="rent"
                       />
                       <div className="box-1">
                         <div className="circle" />
