@@ -2,7 +2,7 @@
 
 
 .gauto-find-area {
-    margin-top: -75px;
+    margin-top: -60px;
   }
   
   .find-box {
@@ -173,7 +173,7 @@
       margin-bottom: 0;
     }
     .gauto-find-area {
-      margin-top: -55px;
+      margin-top: -20px;
     }
   }
   @media only screen and (min-width: 480px) and (max-width: 767px) {

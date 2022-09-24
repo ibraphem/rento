@@ -1,44 +1,53 @@
 import { Col, Container, Row } from "react-bootstrap";
-import "../hero/Hero.css"
+import "../hero/Hero.css";
 import { FaCheck, FaTimes } from "react-icons/fa";
-import mockImg from "../../assets/img/rentoHero.png"
+import mockImg from "../../assets/img/rentoHero.png";
+
 const Hero = () => {
-    
-    
-    return (
-        <section className="gauto-slider-area fix">
-       
-            <div
-              className="gauto-main-slide"
-              style={{ backgroundColor: "#fff" }}
-            >
-              <div className="gauto-main-caption">
-                <div className="gauto-caption-cell">
-                  <Container>
-                    <Row>
-                      <Col md={6}>
-                        <div className="slider-text">
-                          <p >When you rent with RENTO</p>
-                          <h2>Agent Fee <FaTimes color="red"/></h2>
-                          <h2>Agreement Fee <FaTimes color="red"/></h2>
-                          <h2>Pay As you want <FaCheck color="green"/></h2>
-                          {/* <Link to="/" onClick={onClick} className="gauto-btn">
-                            Get Started
-                          </Link> */}
-                        </div>
-                      </Col>
-                      <Col md={6}>
-                        <img className="heroImg" src={mockImg} alt="Hero Img"/>
-                      </Col>
-                    </Row>
-                  </Container>
-                </div>
-              </div>
-            </div>
-    
-    
-      </section>
-    );
+  return (
+    <section className="gauto-slider-area">
+    <div className="gauto-main-slide" >
+          <div className="gauto-main-caption">
+          <div className="gauto-caption-cell">
+            <Container>
+              <Row>
+                <Col md={6}>
+                  <div className="left">
+                    <h1>Agency Fee <FaTimes color="#ec3323"/></h1>
+                    <h1>Agreement Fee <FaTimes color="#ec3323"/></h1>
+                    <h1>Flexible Payment <FaCheck color="#408000"/></h1>
+                    <p>
+                      We offer prospective clients the opportunity to partner
+                      with us in our various products and earn juicy high return
+                      on their investments.
+                    </p>
+                    <button>Create Free Account</button>
+                  </div>
+                </Col>
+                <Col md={6} className="rightCol" >
+                  <div className="right">
+                    <div className="image-frame">
+                      <img
+                        src={mockImg}
+                        alt
+                      />
+                      <div className="box-1">
+                        <div className="circle" />
+                        <h3>+12.4%</h3>
+                        <p>Revenue earned</p>
+                      </div>
+                   
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+          </div>
+          </div>
+          </section>
+     
+  );
 };
 
 export default Hero;
