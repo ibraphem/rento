@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import {
+  FaHome,
+  FaHouseDamage,
   FaPhoneAlt,
   FaSignInAlt,
-  FaUserAlt,
 } from "react-icons/fa";
 import MobileMenu from "../MobileMenu/index"
 import "../header/Header.css"
@@ -30,9 +31,9 @@ const Header = () => {
                   <FaSignInAlt />
                   Login
                 </Link>
-                <Link to="/register">
-                  <FaUserAlt />
-                  Register
+                <Link to="/register/agent">
+                  <FaHouseDamage/>
+                  Upload Property and Earn
                 </Link>
         
               </div>
@@ -51,11 +52,11 @@ const Header = () => {
                 </a>
               </div>
             </Col>
-           <Col lg={6} sm={9}></Col>
-            <div className="col-lg-3">
+           <Col lg={5} sm={9}></Col>
+            <div className="col-lg-4">
               <div className="header-action">
-                <Link to="/contact">
-                  <FaPhoneAlt /> Request Call
+                <Link to="/register/corporate">
+                  <FaHome /> Enjoy Rento with your staffs
                 </Link>
               </div>
             </div>

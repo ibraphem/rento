@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import {
   FaToilet,
@@ -17,22 +17,29 @@ import "slick-carousel/slick/slick-theme.css";
 import CustomToolTip from "../CustomToolTip";
 import Alerts from "../Alerts";
 import { validatePhoneNumber } from "../../utils/validate";
-import FullPageLoader from "../loaders/fullPageLoader/FullPageLoader";
-import AlertModal from "../modals/AlertModal";
+import { onboardTenant } from "../../services/onboardingService";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAlertModal, setLoader } from "../../redux/slices/modalSlice";
+import { aesEncryption } from "../../utils/encrypt";
 
 
 const RentDetails = () => {
   const [email, setEmail] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [initialPayment, setInitialPayment] = useState("");
-  const [bvn, setBvn] = useState("")
+  const [bvnNumber, setBvnNumber] = useState("")
   const [partnerCompany, setPartnerCompany] = useState("")
-  const [showFullPageLoading, setShowFullPageLoading] = useState(false)
-
+  const [profileName, setProfileName] = useState("")
   const [showAlert, setShowAlert] = useState(false)
   const [errMsg, setErrMsg] = useState("")
-
   const [step, setStep] = useState(1)
+
+  let params = useParams();
+  let propertyId = Number(params?.id)
+
+  const dispatch = useDispatch();
+
   const settings = {
     dots: true,
     arrows: true,
@@ -41,54 +48,97 @@ const RentDetails = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  
 
   useEffect(() => {
     if(step === 2 && initialPayment >= rentDataDetail?.amount) {
       setStep(1)
     }
   }, [step, initialPayment])
+
+  const errorRef = useRef(null)
+  const scrollToError = () => {
+    errorRef.current.scrollIntoView()  
+  }
   
 
-  const applyForRent = (e) => {
+  const applyForRent = async(e) => {
     e.preventDefault()
     setShowAlert(false)
+    if(profileName.length < 5){
+      setShowAlert(true)
+      setErrMsg(`Full name should be at least 5 character long`)
+      scrollToError()
+      return
+    }
+
     if(!validatePhoneNumber(phoneNo)){
       setShowAlert(true)
       setErrMsg(`The phone number you provided is incorrect`)
+      scrollToError()
       return
     }
     if(initialPayment < rentDataDetail?.amount / 2) {
       setShowAlert(true)
       setErrMsg(`The minimum initial payment you can make is 50% of the annual rent - (\u20A6${amountFormat(rentDataDetail?.amount / 2)})`)
+      scrollToError()
       return
     }
     
     if(initialPayment > rentDataDetail?.amount) {
       setShowAlert(true)
       setErrMsg(`The amount you entered is greater than the annual rent - (\u20A6${amountFormat(rentDataDetail?.amount)})`)
+      scrollToError()
       return
     }
 
-    if(initialPayment === rentDataDetail?.amount ) {
-      setShowFullPageLoading(true)
-      // Call the onboarding endpoint
-    }
-    if(initialPayment >= rentDataDetail?.amount / 2 && initialPayment < rentDataDetail?.amount){
+    if(initialPayment >= rentDataDetail?.amount / 2 && initialPayment < rentDataDetail?.amount && step === 1){
       setStep(2)
-      // setShowFullPageLoading(true)
-      //Call Endpoint
+      return;
 
     }
+
+    const body1 = {
+      email,
+      phoneNo,
+      profileName,
+      initialPayment: Number(initialPayment),
+      propertyId,  
+    }
+
+    const body2 = {
+      email,
+      phoneNo,
+      profileName,
+      bvnNumber: aesEncryption(bvnNumber),
+      initialPayment,
+      propertyId,
+      corporateId: partnerCompany === null ? null : Number(partnerCompany)
+    }
+
+    const body = step === 1 ? body1 : body2
+
+    dispatch(setLoader({status: true}))
+    const res = (await(onboardTenant(body)))?.data
+    if(res) {
+      dispatch(setLoader({status: false}))
+      dispatch(setAlertModal({status: true, type: res?.status ? "success" : "failed", message: res?.message}))
+  
+    }else {
+      dispatch(setLoader({status: false}))
+      setShowAlert(true)
+      setErrMsg(`Something went wrong. Please try agin.`)
+      scrollToError()
+    }
+  
 
 
   }
+
   return (
     <>
       <section className="gauto-car-booking section_70">
-        <AlertModal onboardingComplete={false} heading="Onboarding Successful" message="You have successfully onboarded with Rento"/>
-        <FullPageLoader showFullPageLoading={showFullPageLoading}/>
         <Container>
-         
           <Row>
             <Col lg={6}>
               <Slider {...settings}>
@@ -116,7 +166,7 @@ const RentDetails = () => {
                   </div>
                 </div>
                 <p> {rentDataDetail?.desc}</p>
-                <div className="car-features clearfix">
+                <div className="car-features clearfix" ref={errorRef}>
                   <ul>
                     <li>
                       <FaToilet /> {rentDataDetail?.toilet} Toilet(s)
@@ -150,19 +200,33 @@ const RentDetails = () => {
         <Container>
        
           <Row>
-            <Col lg={12}>
+            <Col lg={7}>
               <div className="booking-form-left">
                 <div className="single-booking">
                   <h3>Do you like this apartment? Get Started</h3>
              
-              <Alerts showAlert={showAlert} message={errMsg} closeAlert={() => setShowAlert(false)}/>
+                  <Alerts showAlert={showAlert} message={errMsg} closeAlert={() => setShowAlert(false)}/>
        
                   <form onSubmit={applyForRent}>
                     <Row>
-                      <Col lg={3} md={12} className="mb-2">
+                    <Col lg={6} md={12} className="mb-2">
                         <p>
                           <label>
-                            Enter Your Email address
+                            Full Name
+                          </label>
+                          <input
+                            type="text"
+                            value={profileName}
+                            onChange={(e)=>setProfileName(e.target.value)}
+                            placeholder="John Doe"
+                            required
+                          />
+                        </p>
+                      </Col>
+                      <Col lg={6} md={12} className="mb-2">
+                        <p>
+                          <label>
+                            Email
                           </label>
                           <input
                             type="email"
@@ -173,10 +237,10 @@ const RentDetails = () => {
                           />
                         </p>
                       </Col>
-                      <Col lg={3} md={12} className="mb-2">
+                      <Col lg={6} md={12} className="mb-2">
                         <p>
                           <label>
-                            Enter Your Phone Number
+                            Phone
                           </label>
                           <input
                             required
@@ -187,7 +251,7 @@ const RentDetails = () => {
                           />
                         </p>
                       </Col>
-                      <Col lg={4} md={12} className="mb-2">
+                      <Col lg={6} md={12} className="mb-2">
                         <p>
                           <label>
                             Enter{" "}
@@ -208,21 +272,21 @@ const RentDetails = () => {
                       </Col>
                       {step === 2 && (
                         <>
-                        <Col lg={5} md={12} className="mb-2">
+                        <Col lg={6} md={12} className="mb-2">
                         <p>
                           <label>
-                           Enter Your BVN
+                           Enter Your bvnNumber
                           </label>
                           <input
                             type="number"
-                            value={bvn}
-                            onChange={(e)=>setBvn(e.target.value)}
-                            placeholder="somebody@example.com"
+                            value={bvnNumber}
+                            onChange={(e)=>setBvnNumber(e.target.value)}
+                            placeholder="Bank Verification Number"
                             required
                           />
                         </p>
                       </Col>
-                      <Col lg={5} md={12} className="mb-2">
+                      <Col lg={6} md={12} className="mb-2">
                         <p>
                           <label>
                            Partner Company
@@ -231,8 +295,8 @@ const RentDetails = () => {
                             type="text"
                             onChange={(e) => setPartnerCompany(e.target.value)}
                             value={partnerCompany}
-                            placeholder="somebody@example.com"
-                            required
+                            placeholder="Lopo Inc."
+                      
                           />
                         </p>
                       </Col>
@@ -240,7 +304,7 @@ const RentDetails = () => {
                       )}
                       
 
-                      <Col lg={2} md={2} className="mb-2">
+                      <Col lg={12} md={12} className="mb-2">
                       <p>
                        <label>&nbsp;</label>
                       <Button type="submit" className="p-2" style={{width: "100%"}} variant="danger">Proceed</Button>
@@ -248,10 +312,26 @@ const RentDetails = () => {
                       </Col>
                     </Row>
                   </form>
+
+                  
                 </div>
               </div>
             </Col>
+
+            {/* <Col lg={5}>
+              <div className="booking-form-left">
+                <div className="single-booking">
+                  <h3>Frequently Asked Questions</h3>
+             
+                    
+                </div>
+              </div>
+            </Col> */}
           </Row>
+
+      
+            
+       
         </Container>
       </section>
     </>

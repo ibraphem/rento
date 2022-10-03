@@ -1,6 +1,6 @@
 /* ===================== PAGE TITLE ======================*/
 .gauto-breadcromb-area {
-    background: url(../../assets/img/breadcromb.jpg) no-repeat fixed 0 0 / cover;
+    background: #ccc;
     position: relative;
     z-index: 1;
   }

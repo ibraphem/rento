@@ -3,6 +3,7 @@ import Header from '../components/header/Header';
 import Hero from '../components/hero/Hero';
 import { rentData } from '../mock/rentData';
 
+
 const HomeScreen = () => {
     return (
         <>
