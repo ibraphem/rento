@@ -4,7 +4,7 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState: {
     alertModal: {
-      status: false,
+      status: true,
       type: "",
       message: "",
     },

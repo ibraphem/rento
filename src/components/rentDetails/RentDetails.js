@@ -122,6 +122,7 @@ const RentDetails = () => {
     const res = (await(onboardTenant(body)))?.data
     if(res) {
       dispatch(setLoader({status: false}))
+      setEmail(""); setPhoneNo(""); setProfileName(""); setInitialPayment(""); setPartnerCompany(""); setBvnNumber("")
       dispatch(setAlertModal({status: true, type: res?.status ? "success" : "failed", message: res?.message}))
   
     }else {
@@ -143,7 +144,7 @@ const RentDetails = () => {
             <Col lg={6}>
               <Slider {...settings}>
                 {rentDataDetail?.images?.map((image) => (
-                  <div className="car-booking-image">
+                  <div className="car-booking-image" key={rentDataDetail?.id}>
                     <img
                       src={image}
                       alt="car"
